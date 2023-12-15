@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="styles.css">
+  <title>Composición de Componentes</title>
+</head>
+<body>
+  <!-- Instancia del Componente Contenedor del Blog -->
+  <blog-container>
+    <!-- Contenido de la Publicación del Blog -->
+    <blog-post slot="post" title="Mi Primer Blog" content="Este es mi primer blog. ¡Bienvenidos!"></blog-post>
+    <!-- Contenido de la Lista de Comentarios -->
+    <comment-list slot="comment-list" comments='["Gran artículo!", "Estoy emocionado por más blogs."]'></comment-list>
+    <!-- Contenido del Formulario de Comentarios -->
+    <comment-form slot="comment-form"></comment-form>
+  </blog-container>
+
+  <!-- Script para manejar eventos de comentarios -->
+  <script>
+    document.querySelector('blog-container').addEventListener('comment-submitted', (event) => {
+      // Manejar el evento de comentario enviado
+      const commentList = document.querySelector('comment-list');
+      const newComment = event.detail;
+
+      // Actualizar la lista de comentarios con el nuevo comentario
+      commentList.updateCommentList(newComment);
+
+      // Mostrar una alerta
+      alert('Comentario enviado correctamente');
+    });
+  </script>
+
+  <button type="button"><a href="../index.html">Regresar</a></button>
+
+  <!-- Importar archivos JavaScript de componentes -->
+  <script src="blog-container.js"></script>
+  <script src="comment-form.js"></script>
+  <script src="comment-list.js"></script>
+  <script src="blog-post.js"></script>
+</body>
+</html>
